@@ -16,4 +16,8 @@ How big of a problem is beauty bias? How widespread is the phenomenon? And can i
 
 ## Tasks
 
-- 
+* Finetune a diffusion model using a human preference model. Does this increase the attractivenss of faces?
+    * We can use algorithms like ReFL or DRaFT to finetune the diffusion model found in the [Diffusion101 notebook](https://github.com/harveymannering/AI_Manipulation_Hackathon/blob/main/Diffusion101.ipynb).
+    * Train a [ResNet](https://github.com/harveymannering/AI_Manipulation_Hackathon/blob/main/resnet.ipynb) on the [CelebA-HQ dataset](https://www.kaggle.com/datasets/ipythonx/celebamaskhq) resized to $256\times256$ to predict attrivativenss. Each images in this dataset has a binary label called attractive.
+    * Generate 1,000 face images with the diffusion model before and after finetuning. Use the classifier to count the number of attractive faces. Does finetuning increase or decrease the number of attractive faces?
+* 
