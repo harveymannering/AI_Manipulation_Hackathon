@@ -72,7 +72,7 @@ if __name__ == '__main__':
     # Iterate over paths and generate random expressions
     for img_idx in range(total_images):
         with torch.no_grad():
-            latents = pipe.prepare_latents(
+            latent = pipe.prepare_latents(
                 1,
                 pipe.transformer.in_channels,
                 1024,
@@ -82,8 +82,8 @@ if __name__ == '__main__':
                 None,
             )
             latent = latent.repeat(len(prompts), 1, 1, 1)
-            image = pipe(
-                latents=latents,
+            images = pipe(
+                latents=latent,
                 prompt=prompts,
                 height=1024,
                 width=1024,
