@@ -31,7 +31,7 @@ import torch
 import cv2
 import numpy as np
 from sklearn.mixture import GaussianMixture
-from diffusers import FluxKontextPipeline
+from diffusers import ZImagePipeline
 
 def set_seed(seed: int = 42):
     random.seed(seed)
@@ -54,10 +54,11 @@ if __name__ == '__main__':
     
     # Initialize the generator network
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    pipe = FluxKontextPipeline.from_pretrained(
-        "black-forest-labs/FLUX.1-Kontext-dev", 
+    pipe = ZImagePipeline.from_pretrained(
+        "Tongyi-MAI/Z-Image-Turbo",
         torch_dtype=torch.bfloat16,
-        cache_dir = args.cache_dir
+        low_cpu_mem_usage=False,
+        cache_dir = args.cache_dir,
     )
     pipe.to(device)
 
@@ -71,12 +72,23 @@ if __name__ == '__main__':
     # Iterate over paths and generate random expressions
     for img_idx in range(total_images):
         with torch.no_grad():
-            latent = torch.randn(1, 4096, 64, device=pipe.transformer.device)
-            latent = latent.repeat(len(prompts), 1, 1)
-            images = pipe(
-                latents=latent,
+            latents = pipe.prepare_latents(
+                1,
+                pipe.transformer.in_channels,
+                1024,
+                1024,
+                torch.float32,
+                "cuda",
+                None,
+            )
+            latent = latent.repeat(len(prompts), 1, 1, 1)
+            image = pipe(
+                latents=latents,
                 prompt=prompts,
-                num_inference_steps=40,
+                height=1024,
+                width=1024,
+                num_inference_steps=9,  # This actually results in 8 DiT forwards
+                guidance_scale=0.0,     # Guidance should be 0 for the Turbo models
             ).images
 
             # Save images
