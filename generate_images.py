@@ -25,14 +25,37 @@ import torch
 from tqdm import tqdm
 import numpy as np
 from diffusers import DDIMScheduler
-from utils import load_sdxl
 import random
 import numpy as np
 import torch
-from utils import ReNoise_Inversion
 import cv2
 import numpy as np
 from sklearn.mixture import GaussianMixture
+
+
+def load_sdxl(args):
+    
+    # Create the DDIM noise schedule
+    noise_scheduler = DDIMScheduler(
+        num_train_timesteps=1000,
+        beta_start=0.00085,
+        beta_end=0.012,
+        beta_schedule="scaled_linear",
+        clip_sample=False,
+        set_alpha_to_one=False,
+        steps_offset=1,
+    )
+    
+    # Initialize SDXL
+    pipe = DiffusionPipeline.from_pretrained(
+        "stabilityai/stable-diffusion-xl-base-1.0", # "SG161222/RealVisXL_V3.0", #"stabilityai/stable-diffusion-xl-base-1.0", 
+        torch_dtype=torch.float16,
+        scheduler=noise_scheduler,
+        use_safetensors=True,
+        variant="fp16",
+        cache_dir = args.cache_dir,
+    )
+    return pipe
 
 def set_seed(seed: int = 42):
     random.seed(seed)
