@@ -32,3 +32,4 @@ How big of a problem is beauty bias? How widespread is the phenomenon? And can i
     * Are there studies on how beauty standards shaped by Photoshop or social media affect people?
     * How do media-driven beauty standards impact self-image?
     * Are people more likely to trust attractive faces?
+    * How do human preference models [ImageReward](https://arxiv.org/abs/2304.05977), [HPS](https://arxiv.org/abs/2306.09341), and [PickScore](https://arxiv.org/abs/2305.01569) gather their datasets?
