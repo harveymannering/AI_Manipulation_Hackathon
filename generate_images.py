@@ -75,5 +75,11 @@ if __name__ == '__main__':
             
             # Save images
             for p_idx, img in enumerate(images):
-                img_path = os.path.join(args.output, f"{img_idx}_{p_idx}.jpg" )
+                if p_idx == 0:
+                    output_word = "unattractive"
+                elif p_idx == 1:
+                    output_word = "normal"
+                else:   
+                    output_word = "attractive"
+                img_path = os.path.join(args.output, f"{img_idx}_{output_path}.jpg" )
                 img.save(img_path)
