@@ -12,4 +12,13 @@ To measure the attrativeness baises for the models we consider run the following
 python measure_bias.py --image_path ./generated_images_flux --dataset synthetic --caption_strategy const --batch_size 1 --const_caption "a portrait photo of a face"
 ```
 
+To run VLM evaluation (current default is Qwen3-VL-8B), please run the following inside vlms directory
+```
+python vlm_eval.py
+```
+OR (for customised run)
+```
+python vlm_eval.py --seed 42 --modelname "Qwen/Qwen3-VL-8B-Instruct" --datasetname "flux"
+```
+
 This work was done as a part of the AI Manipulation Hackathon at Apart Research from Jan 9th to Jan 11th 2026.
