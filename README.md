@@ -1,6 +1,6 @@
 # Biased Attractiveness Bench
 
-The repo contains code for Biased Attractiveness Bench (BAB), a dataset of 300 images with varying levels of attrativeness and corresponding label. Images are generated using FLUX.1 Kontext and labelled using SwinFace. Images can be found in the [generated_images_flux](https://github.com/harveymannering/AI_Manipulation_Hackathon/tree/main/generated_images_flux) directory. To run our generation code run the following command:
+The repo contains code for Biased Attractiveness Bench (BAB), a dataset of 300 images with varying levels of attrativeness and corresponding label. Images are generated using FLUX.1 Kontext and labelled using SwinFace. Images can be found in the [generated_images_flux](https://github.com/harveymannering/AI_Manipulation_Hackathon/tree/main/generated_images_flux) directory and labels can be found in the [result_flux.json](https://github.com/harveymannering/AI_Manipulation_Hackathon/blob/main/result_flux.json) file. To run our generation code run the following command:
 
 ``` 
 python generate_images.py --output_dir ./generated_images/ --cache_dir ./cache_dir/
